@@ -17,7 +17,10 @@ def msg_text(message):
     if message.chat.id != config.chat_id:
         bot.forward_message(config.chat_id, message.chat.id, message.message_id)
     else:
-        bot.send_message(message.reply_to_message.id, message.text)
+        try:
+            bot.send_message(message.reply_to_message.forward_from.id, message.text)
+        except:
+            pass
 
 bot.polling()
 #if __name__ == '__main__':
